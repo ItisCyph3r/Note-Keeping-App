@@ -1,0 +1,16 @@
+{
+    "blogs": [
+        {
+            "title": "My First Blog",
+            "body": "Get yourself a maiden",
+            "author": "Saati",
+            "id": 1
+        },
+        {
+            "title": "My Second Blog",
+            "body": "Maidenless fiend",
+            "author": "Kinessa",
+            "id": 2
+        }
+    ]
+}

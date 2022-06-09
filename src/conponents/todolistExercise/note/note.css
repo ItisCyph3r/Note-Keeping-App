@@ -8,6 +8,11 @@
     float: left;
 }
 
+body{
+    background-color: #004f8c;
+background-image: url("https://www.transparenttextures.com/patterns/black-scales.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
 .note h1 {
     font-size: 1.1em;
     margin-bottom: 6px;

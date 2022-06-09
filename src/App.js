@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import ToDo from './conponents/todo/ToDo';
-
+import CardList from './conponents/cardList/cardlist';
 
 
 class App extends Component {
@@ -11,7 +10,7 @@ class App extends Component {
 
     return ( 
       <div className="App">
-        <ToDo/>
+        <CardList/>
       </div>
     )
   }

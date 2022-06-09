@@ -1,0 +1,15 @@
+// import React from 'react';
+
+// export default function Display(props) {
+//     const {fetchRes} = props;
+
+//     return (
+//         <>
+//         {fetchRes.map((element) => (    
+//                 <h1 key={element.id}>
+//                     {element.name}
+//                 </h1>                
+//             ))}
+//         </>
+//     );
+// }

@@ -1,0 +1,29 @@
+// import {useState, useEffect} from 'react'
+
+// const UseFetch = (url) => {
+
+//     const [name, setName] = useState([]);
+//     const [fetched, setFetched] = useState(false)
+//     const [error, setError] = useState('')
+        
+//     useEffect(() => {
+//         setTimeout(() => {
+//             fetch(url)
+//             .then((response) => {
+//                 if(!response) throw Error('Could not fetch data')
+//                 else return response.json()
+//             })
+//             .then((data) => {
+//                 setName(data)
+                
+//                 setFetched(true)
+//                 setError(null)
+//             })
+//             .catch((error) => setError(error.message));
+//         }, 1000)
+//     }, [url])
+
+//     return {name, fetched, error}
+// }
+
+// export default UseFetch;
