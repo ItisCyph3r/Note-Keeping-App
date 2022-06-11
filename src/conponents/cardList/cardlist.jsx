@@ -11,7 +11,8 @@ export default class CardList extends Component {
             monsters: [],
             searchField: '',
             loading: true,
-            loadingError: '' 
+            loadingError: '',
+            name: ''
         }
 
         // this.handleChange = this.handleChange.bind(this)
@@ -35,8 +36,13 @@ export default class CardList extends Component {
     }
     
     handleChange = (e) => {
-        this.setState({searchField: e.target.value}, () => {console.log(this.state)})  
+        this.setState({
+            searchField: e.target.value,
+            name: e.target.value
+        }, () => {console.log(this.state)})  
     }
+
+
 
     render() {
 
@@ -47,7 +53,9 @@ export default class CardList extends Component {
 
         return (
         <>
-            <h1 style={{textAlign: 'center'}}>Zapnode</h1>
+            <h1 style={{textAlign: 'center'}}>
+                {this.state.name}
+            </h1>
             <SearchBox 
                 type='text' 
                 placeholder='Search now...'
