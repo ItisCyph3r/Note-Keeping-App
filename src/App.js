@@ -6,7 +6,8 @@ import {
   useNavigate,
   useParams
 } from 'react-router-dom';
-import Ecommerce from './conponents/reactCommerce/ecommerce';
+import Ecommerce from './conponents/reactCommerce/homepage/home';
+import Shoppage from './conponents/reactCommerce/shopPage/shop';
 
 
 
@@ -52,7 +53,7 @@ class App extends Component {
         <div className="App">
           <Routes>
             <Route exact path="/" element={<Ecommerce/>}/>
-            <Route exact path="/contact" element={<Contact/>}/>
+            <Route exact path="/shop" element={<Shoppage/>}/>
             <Route exact path="/about/:userid" element={<TopicList/>}/>
             <Route exact path="*" element={<TopicDetail/>}/>
           </Routes>

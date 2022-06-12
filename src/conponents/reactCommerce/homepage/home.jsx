@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import { MenuItem } from './menu-item';
 import './directory.styles.css';
+
+
 
 export default class Ecommerce extends Component {
 
@@ -40,11 +43,19 @@ export default class Ecommerce extends Component {
         };
     }
 
+    
+
     render() {
+        
         return (
         <>
             <div className='homepage'>
             Home
+            <Link to='/shop'>
+                <button>
+                    Shop page
+                </button>
+            </Link>
                 <div className='directory-menu'>
                     
                     {
@@ -52,6 +63,8 @@ export default class Ecommerce extends Component {
                             <MenuItem key={id} title={title} url={imageUrl} size={size}/>
                         ))
                     }
+                    
+                    
                 </div>
             </div>
         </>
