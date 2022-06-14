@@ -6,9 +6,12 @@ import {
   useNavigate,
   useParams
 } from 'react-router-dom';
+import Contact from './conponents/reactCommerce/contact/contact';
+import Header from './conponents/reactCommerce/header/header';
 import Ecommerce from './conponents/reactCommerce/homepage/home';
+import { Categories } from './conponents/reactCommerce/shopPage/categories';
 import Shoppage from './conponents/reactCommerce/shopPage/shop';
-
+import {auth} from '../src/firebase/firebase.util.jsx';
 
 
 const HomePage = (props) => {
@@ -38,23 +41,41 @@ const TopicDetail = (props) => {
   )
 }
 
-const Contact = (props) => {
-  return (
-    <div>
-      <h1>Child page</h1>
-    </div>
-  )
-}
+
 
 class App extends Component {
+
+  constructor(){
+    super();
+
+    this.state={
+      currentUser: null
+    }
+  }
+
+  unsubscribeFromAuth = null
+
+  componentDidMount(){
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      // console.log(user )
+      this.setState({currentUser: user})
+    })
+  }
+
+  componentWillUnmount(){
+    this.unsubscribeFromAuth();
+  }
+
   render() {
     return ( 
       <Router>
         <div className="App">
+          <Header currentUser={this.state.currentUser}/>
           <Routes>
             <Route exact path="/" element={<Ecommerce/>}/>
             <Route exact path="/shop" element={<Shoppage/>}/>
-            <Route exact path="/about/:userid" element={<TopicList/>}/>
+            <Route exact path="/shop/:categories" element={<Categories/>}/>
+            <Route exact path="/contact" element={<Contact/>}/>
             <Route exact path="*" element={<TopicDetail/>}/>
           </Routes>
         </div>

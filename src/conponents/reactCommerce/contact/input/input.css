@@ -1,0 +1,10 @@
+.contact-input{
+    /* padding: 15px; */
+    width: 500px;
+    border: none;
+    /* color: #fff; */
+}
+
+.contact-input:focus{
+    outline: none;
+}
