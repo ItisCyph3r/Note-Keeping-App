@@ -5,33 +5,6 @@ import { ReactComponent as Logo } from "../../../assets/4.4 crown.svg";
 import {auth} from '../../../firebase/firebase.util';
 
 
-
-
-
-
-// currentUser ? 
-//                     (
-//                         <div
-//                             className='option' 
-//                             onClick={() => auth.signOut()}
-//                         >
-//                             Sign out
-//                         </div>
-//                     ) 
-//                     :
-//                     (
-//                         <Link 
-//                             className='option' 
-//                             to='/contact'
-//                         >
-//                             Sign in
-//                         </Link>
-//                     )
-
-
-
-
-
 const Header = ({currentUser}) => {
     return (
         <div className='header'>

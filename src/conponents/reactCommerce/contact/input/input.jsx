@@ -10,6 +10,7 @@ export const ContactInput = ({name, type, label, handleChange}) => {
                     name={name}
                     className='contact-input'
                     type={type}
+                    
                     // required 
                 />
                 <hr></hr>

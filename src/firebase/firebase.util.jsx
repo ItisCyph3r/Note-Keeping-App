@@ -1,11 +1,8 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { doc, setDoc, getFirestore, getDoc } from "firebase/firestore";
 
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyDvPobKi3iDQes0C9krlBgHCxeH82AYXig",
     authDomain: "crowndb-c9f9c.firebaseapp.com",
@@ -16,11 +13,9 @@ const firebaseConfig = {
     measurementId: "G-X0MGXKD345"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app)
 export const db = getFirestore(app);
-
 
 const provider = new GoogleAuthProvider();
 
@@ -28,14 +23,56 @@ provider.setCustomParameters({
     prompt: 'select_account'
 });
 
-export const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-    .then((response) => {
-        console.log(response)
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+export const createProfileDocument = async (userAuth, additionDetails) => {
+    const {displayName, email, uid} = userAuth
+    const createdAt = new Date();
+
+    const docRef = await doc(db, "users", uid);
+
+    const snapShot = await getDoc(docRef);
+
+    if(!snapShot.exists()){
+        try {
+            await setDoc(doc(db, "users", uid), {
+                email: email,
+                displayName: displayName,
+                createdAt: createdAt,
+                ...additionDetails
+            });
+            console.log('successful')
+
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+    else{
+        console.log('user exists')
+    }
+    return snapShot;
 }
 
-export default auth;
+
+
+export const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+
+    console.log(result)
+    // ...
+}).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+});
+}
+

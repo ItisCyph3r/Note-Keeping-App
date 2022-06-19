@@ -11,7 +11,7 @@ import Header from './conponents/reactCommerce/header/header';
 import Ecommerce from './conponents/reactCommerce/homepage/home';
 import { Categories } from './conponents/reactCommerce/shopPage/categories';
 import Shoppage from './conponents/reactCommerce/shopPage/shop';
-import {auth} from '../src/firebase/firebase.util.jsx';
+import {auth, createProfileDocument} from '../src/firebase/firebase.util.jsx';
 
 
 const HomePage = (props) => {
@@ -56,10 +56,17 @@ class App extends Component {
   unsubscribeFromAuth = null
 
   componentDidMount(){
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      // console.log(user )
-      this.setState({currentUser: user})
-    })
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth){
+        const userRef = await createProfileDocument(userAuth)
+
+        this.setState({
+          currentUser:{id: userRef.id, ...userRef.data()}
+        }, () => {console.log(this.state)})
+      }
+      this.setState({currentUser: userAuth})  
+    }) 
+    
   }
 
   componentWillUnmount(){

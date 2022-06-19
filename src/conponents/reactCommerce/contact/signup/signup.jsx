@@ -1,4 +1,6 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { Component } from 'react'
+import { auth, createProfileDocument } from '../../../../firebase/firebase.util';
 import { ContactBtn } from '../button/button'
 import { ContactInput } from '../input/input'
 import './signup.css';
@@ -16,19 +18,34 @@ export default class SignUp extends Component {
         }
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
+    handleClick = async e => {
+        // console.log('hehe')
 
-        this.setState({
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
+        const {displayName, email, password, confirmPassword} = this.state;
+
+        console.log(email, password, confirmPassword, displayName)
+
+        if(password !== confirmPassword){
+            alert('Passwords dont match!!!')
+            
+            return; 
+        }
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(async (userCredentials) => {
+
+            const user = userCredentials.user;
+            console.log(displayName)
+            await createProfileDocument(user, {displayName})
         })
+
+        e.preventDefault();
     }
 
     handleChange = (e) => {
-        console.log(e.target.value)
+        const {name, value} = e.target;
+
+        this.setState({[name]: value})
     }
 
     render() {
@@ -37,7 +54,7 @@ export default class SignUp extends Component {
             <h2>I already have an account</h2>
             <span>Sign in with your email</span>
             
-            <form className='form'>
+            <form className='form' onSubmit={e => e.preventDefault()}>
                 <ContactInput
                     name='displayName'
                     value={this.state.displayName}
@@ -69,6 +86,7 @@ export default class SignUp extends Component {
                 <ContactBtn
                     btnColor='black'
                     placeholder='SIGN UP'
+                    onClick={this.handleClick}
                 />
             </form>     
         </div>
