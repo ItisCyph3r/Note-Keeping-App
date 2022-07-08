@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,
@@ -12,6 +11,9 @@ import Ecommerce from './conponents/reactCommerce/homepage/home';
 import { Categories } from './conponents/reactCommerce/shopPage/categories';
 import Shoppage from './conponents/reactCommerce/shopPage/shop';
 import {auth, createProfileDocument} from '../src/firebase/firebase.util.jsx';
+import Counter from './conponents/counter/counter';
+import Log from './conponents/reduxLogin/log';
+import Sign from './conponents/reduxLogin/sign';
 
 
 const HomePage = (props) => {
@@ -57,16 +59,19 @@ class App extends Component {
 
   componentDidMount(){
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth){
+      if(userAuth){
         const userRef = await createProfileDocument(userAuth)
+        // console.log(userRef)
 
         this.setState({
-          currentUser:{id: userRef.id, ...userRef.data()}
-        }, () => {console.log(this.state)})
+          currentUser: {
+            id: userRef.id,
+            ...userRef.data()
+          }
+        }, () => {console.log('.')})
       }
-      this.setState({currentUser: userAuth})  
+      this.setState({currentUser: userAuth})
     }) 
-    
   }
 
   componentWillUnmount(){
@@ -75,24 +80,27 @@ class App extends Component {
 
   render() {
     return ( 
-      <Router>
+      
+        // <div className="App">
+        //   {/* <Header/> */}
+        //   <Routes>
+        //     <Route exact path="/" element={<Ecommerce/>}/>
+        //     <Route exact path="/shop" element={<Shoppage/>}/>
+        //     <Route exact path="/shop/:categories" element={<Categories/>}/>
+        //     <Route exact path="/contact" element={<Contact/>}/>
+        //     <Route exact path="*" element={<TopicDetail/>}/>
+        //   </Routes>
+        // </div>
         <div className="App">
-          <Header currentUser={this.state.currentUser}/>
-          <Routes>
-            <Route exact path="/" element={<Ecommerce/>}/>
-            <Route exact path="/shop" element={<Shoppage/>}/>
-            <Route exact path="/shop/:categories" element={<Categories/>}/>
-            <Route exact path="/contact" element={<Contact/>}/>
-            <Route exact path="*" element={<TopicDetail/>}/>
-          </Routes>
+          <Sign/>
         </div>
-
-
         
-      </Router>
+        
     )
   }
 }
+
+
 
 export default App;
 

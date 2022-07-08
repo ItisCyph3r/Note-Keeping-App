@@ -1,0 +1,8 @@
+//   <Header/>
+        //   <Routes>
+        //     <Route exact path="/" element={<Ecommerce/>}/>
+        //     <Route exact path="/shop" element={<Shoppage/>}/>
+        //     <Route exact path="/shop/:categories" element={<Categories/>}/>
+        //     <Route exact path="/contact" element={<Contact/>}/>
+        //     <Route exact path="*" element={<TopicDetail/>}/>
+        //   </Routes>
