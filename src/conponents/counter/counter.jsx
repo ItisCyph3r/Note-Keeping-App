@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import './Counter.css';
-import { counterActions } from '../../redux/store';
+import { counterActions } from '../../redux/counter/counter';
 
 
 
@@ -48,7 +48,7 @@ export default function Counter() {
     const increaseFN = () => { dispatch(counterActions.increase()) }
 
     const decreaseFN = () => { dispatch(counterActions.decrease()) }
- 
+
     const multiplyFN = () => { dispatch(counterActions.multiply(10)) }
     
     return (

@@ -2,7 +2,8 @@ import React from 'react';
 import Input from './input';
 import { useSelector, useDispatch } from 'react-redux';
 import './Login.css';
-import { userActions } from '../../redux/store';
+import { userActions } from '../../redux/userAuth/user';
+
 export default function Sign() {
 
     const Fname = useSelector((state) => state.user.firstName);
@@ -21,10 +22,10 @@ export default function Sign() {
 
     return (
         <>
-            {Fname}
-            {Lname}
-            {FFS}
             <form className="form" onSubmit={e => e.preventDefault()}>
+                {Fname}
+                {Lname}
+                {FFS}
                 <Input type="text" placeholder="Username" onChange={setFname} />
                 <Input type="text" placeholder="Username" onChange={setLname} />
                 
